@@ -22,7 +22,6 @@ class FirstPlugin extends PluginBase implements Listener {
         return true;
     }
     return false;
-        $this->getServer()->getCommandMap()->register("craft", new CraftCommand());
 }
     public function onDisable() {
         $this->getServer()->getLogger()->info("§cНаш плагин выключился");
