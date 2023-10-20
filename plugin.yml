@@ -1,7 +1,7 @@
 ---
 name: RustLight
 version: 0.0.1
-main: \src\RustLight\Main
+main: Kefir\RustLight\Main
 api: 5.6.1
 src-namespace-prefix: Kefir\RustLight
 ...
