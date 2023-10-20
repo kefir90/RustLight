@@ -33,13 +33,4 @@ class FirstPlugin extends PluginBase implements Listener {
         $event->setJoinMessage("§aИгрок §b$nickName §aзашел на сервер! §6Поприветствуем!");
         $player->sendMessage("§eТы зашел на сервер! §b$nickName");
     }
-
-    public function onMove(PlayerMoveEvent $event) {
-        $player = $event->getPlayer();
-        $nickName = $player->getName();
-        $x = $player->getFloorX();
-        $y = $player->getFloorY();
-        $z = $player->getFloorZ();
-        $player->sendTip("$nickName: x: $x, y: $y, z: $z");
-    }
 }
