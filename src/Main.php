@@ -23,9 +23,9 @@ class FirstPlugin extends PluginBase implements Listener {
     }
     return false;
 }
-    public function onDisable() {
-        $this->getServer()->getLogger()->info("§cНаш плагин выключился");
-    }
+    public function onDisable(): void {
+    $this->getServer()->getLogger()->info("§cНаш плагин выключился");
+}
     
     public function onJoin(PlayerJoinEvent $event) {
         $player = $event->getPlayer();
