@@ -14,11 +14,16 @@ use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\event\player\PlayerMoveEvent;
 
 class FirstPlugin extends PluginBase implements Listener {
-    public function onEnable() {
-        $this->getServer()->getLogger()->info("§aНаш плагин запустился");
-        $this->getServer()->getPluginManager()->registerEvents($this, $this);
+    public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
+    $commandName = $command->getName();
+    $nickName = $sender->getName();
+    if ($commandName === "craft") {
+        $sender->sendMessage("Крафт");
+        return true;
     }
-
+    return false;
+        $this->getServer()->getCommandMap()->register("craft", new CraftCommand());
+}
     public function onDisable() {
         $this->getServer()->getLogger()->info("§cНаш плагин выключился");
     }
