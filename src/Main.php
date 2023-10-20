@@ -27,16 +27,7 @@ class FirstPlugin extends PluginBase implements Listener {
     public function onDisable() {
         $this->getServer()->getLogger()->info("§cНаш плагин выключился");
     }
-
-    public function onCommand(CommandSender $sender, Command $command, $label, array $args) {
-        $commandName = $command->getName();
-        $nickName = $sender->getName();
-        if ($commandName == "craft") {
-            $sender->sendMessage("Крафт");
-        }
-        return false;
-    }
-
+    
     public function onJoin(PlayerJoinEvent $event) {
         $player = $event->getPlayer();
         $nickName = $player->getName();
