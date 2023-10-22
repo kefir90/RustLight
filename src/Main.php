@@ -14,6 +14,7 @@ use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\Player;
 use pocketmine\Server;
 use pocketmine\form\ModalForm;
+use jojoe77777\FormAPI\SimpleForm;
 
 class FirstPlugin extends PluginBase implements Listener {
 
