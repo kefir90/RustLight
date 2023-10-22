@@ -11,16 +11,16 @@ use pocketmine\command\CommandSender;
 use pocketmine\command\Command;
 
 use pocketmine\event\player\PlayerJoinEvent;
-use pocketmine\event\player\PlayerMoveEvent;
-
 use pocketmine\Player;
+use pocketmine\Server;
+use pocketmine\form\ModalForm;
 
 class FirstPlugin extends PluginBase implements Listener {
 
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
         $commandName = $command->getName();
         $nickName = $sender->getName();
-        if (strtolower($commandName) === "craft") { // Добавлено преобразование к нижнему регистру для сравнения
+        if (strtolower($commandName) === "craft") {
             $sender->sendMessage("Крафт");
             $this->openCustomMenu($sender);
             return true;
@@ -29,12 +29,12 @@ class FirstPlugin extends PluginBase implements Listener {
     }
 
     public function onEnable(): void {
-        $this->getServer()->getLogger()->info("§cRustLightPlugin is starting"); // Исправлено getServer()
+        $this->getServer()->getLogger()->info("§cRustLightPlugin is starting");
         $this->getServer()->getLogger()->info("§cAvoid ку кста");
     }
 
     public function onDisable(): void {
-        $this->getServer()->getLogger()->info("§cRustLightPlugin is shutdown"); // Исправлено getServer()
+        $this->getServer()->getLogger()->info("§cRustLightPlugin is shutdown");
     }
 
     public function onJoin(PlayerJoinEvent $event) {
@@ -45,39 +45,22 @@ class FirstPlugin extends PluginBase implements Listener {
     }
 
     private function openCustomMenu(Player $player) {
-        $form = new SimpleForm(function (Player $player, ?int $data) {
-            if ($data === null) return;
-            // Обработка выбора из меню
-            switch ($data) {
-                case 0:
-                    // первая
-                    // Добавьте действия для первой опции
-                    break;
-                case 1:
-                    // вторая
-                    // Добавьте действия для второй опции
-                    break;
-                // и так далее
-                default:
-                    // Обработка неизвестного выбора
-                    break;
+        $form = new ModalForm(function (Player $player, ?bool $choice) {
+            if ($choice === null) return;
+            if ($choice) {
+                // Выбрано "Да"
+                $player->sendMessage("Вы выбрали 'Да'");
+                // Добавьте здесь действия для выбора 'Да'
+            } else {
+                // Выбрано "Нет"
+                $player->sendMessage("Вы выбрали 'Нет'");
+                // Добавьте здесь действия для выбора 'Нет'
             }
         });
         $form->setTitle("Крафт");
-        $form->setContent("Выберите предмет");
-        $form->addButton("Киянка");
-        $form->addButton("План постройки");
-        $form->addButton("Каменный топор");
-        $form->addButton("Каменная кирка");
-        $form->addButton("Камень");
-        $form->addButton("Верстак первого уровня");
-        $form->addButton("Деревянное копье");
-        $form->addButton("Каменное копье");
-        $form->addButton("Печь");
-        $form->addButton("Замок");
-        $form->addButton("Деревянная дверь");
-        $form->addButton("Кодовый замок");
-        // Добавьте больше кнопок при необходимости
+        $form->setContent("Вы уверены, что хотите начать крафт?");
+        $form->setButton1("Да");
+        $form->setButton2("Нет");
         $form->sendToPlayer($player);
     }
 }
