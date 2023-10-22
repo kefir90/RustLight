@@ -13,7 +13,6 @@ use pocketmine\command\Command;
 use pocketmine\event\player\PlayerJoinEvent;
 use pocketmine\Player;
 use pocketmine\Server;
-use pocketmine\form\ModalForm;
 use jojoe77777\FormAPI\SimpleForm;
 
 class FirstPlugin extends PluginBase implements Listener {
@@ -46,22 +45,34 @@ class FirstPlugin extends PluginBase implements Listener {
     }
 
     private function openCustomMenu(Player $player) {
-        $form = new ModalForm(function (Player $player, ?bool $choice) {
-            if ($choice === null) return;
-            if ($choice) {
-                // Выбрано "Да"
-                $player->sendMessage("Вы выбрали 'Да'");
-                // Добавьте здесь действия для выбора 'Да'
-            } else {
-                // Выбрано "Нет"
-                $player->sendMessage("Вы выбрали 'Нет'");
-                // Добавьте здесь действия для выбора 'Нет'
+        $form = new SimpleForm(function (Player $player, $data) {
+            if ($data === null) return;
+            // Обработка выбора из меню
+            switch ($data) {
+                case 0:
+                    $player->sendMessage("Выбрана опция 0");
+                    break;
+                case 1:
+                    $player->sendMessage("Выбрана опция 1");
+                    break;
+                // и так далее
             }
         });
         $form->setTitle("Крафт");
-        $form->setContent("Вы уверены, что хотите начать крафт?");
-        $form->setButton1("Да");
-        $form->setButton2("Нет");
+        $form->setContent("Выберите предмет");
+        $form->addButton("Киянка");
+        $form->addButton("План постройки");
+        $form->addButton("Каменный топор");
+        $form->addButton("Каменная кирка");
+        $form->addButton("Камень");
+        $form->addButton("Верстак первого уровня");
+        $form->addButton("Деревянное копье");
+        $form->addButton("Каменное копье");
+        $form->addButton("Печь");
+        $form->addButton("Замок");
+        $form->addButton("Деревянная дверь");
+        $form->addButton("Кодовый замок");
+        // и так далее
         $form->sendToPlayer($player);
     }
 }
