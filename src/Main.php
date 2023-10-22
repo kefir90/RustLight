@@ -16,31 +16,34 @@ use pocketmine\event\player\PlayerMoveEvent;
 use pocketmine\Player;
 
 class FirstPlugin extends PluginBase implements Listener {
+
     public function onCommand(CommandSender $sender, Command $command, string $label, array $args): bool {
-    $commandName = $command->getName();
-    $nickName = $sender->getName();
-    if ($commandName === "craft") {
-        $sender->sendMessage("Крафт");
-        $this->openCustomMenu($sender);
-        return true;
+        $commandName = $command->getName();
+        $nickName = $sender->getName();
+        if (strtolower($commandName) === "craft") { // Добавлено преобразование к нижнему регистру для сравнения
+            $sender->sendMessage("Крафт");
+            $this->openCustomMenu($sender);
+            return true;
+        }
+        return false;
     }
-    return false;
-}
+
     public function onEnable(): void {
-        $this->getserver()->getLogger()->info("§cRustLightPlugin is starting");
-        $this->getserver()->getLogger()->info("§cAvoid ку кста");
+        $this->getServer()->getLogger()->info("§cRustLightPlugin is starting"); // Исправлено getServer()
+        $this->getServer()->getLogger()->info("§cAvoid ку кста");
     }
 
     public function onDisable(): void {
-    $this->getServer()->getLogger()->info("§cRustLightPlugin is shutdown");
-}
-    
+        $this->getServer()->getLogger()->info("§cRustLightPlugin is shutdown"); // Исправлено getServer()
+    }
+
     public function onJoin(PlayerJoinEvent $event) {
         $player = $event->getPlayer();
         $nickName = $player->getName();
         $event->setJoinMessage("§aИгрок §b$nickName §aзашел на сервер!");
         $player->sendMessage("§eТы зашел на сервер! §b$nickName");
     }
+
     private function openCustomMenu(Player $player) {
         $form = new SimpleForm(function (Player $player, ?int $data) {
             if ($data === null) return;
@@ -48,11 +51,16 @@ class FirstPlugin extends PluginBase implements Listener {
             switch ($data) {
                 case 0:
                     // первая
+                    // Добавьте действия для первой опции
                     break;
                 case 1:
                     // вторая
+                    // Добавьте действия для второй опции
                     break;
                 // и так далее
+                default:
+                    // Обработка неизвестного выбора
+                    break;
             }
         });
         $form->setTitle("Крафт");
@@ -69,7 +77,7 @@ class FirstPlugin extends PluginBase implements Listener {
         $form->addButton("Замок");
         $form->addButton("Деревянная дверь");
         $form->addButton("Кодовый замок");
-        // тута крч больше кнопок
+        // Добавьте больше кнопок при необходимости
         $form->sendToPlayer($player);
     }
 }
