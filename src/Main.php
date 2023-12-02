@@ -19,7 +19,7 @@ final class Main extends PluginBase
 	{
 		if(!$sender instanceof Player) { $sender->sendMessage("Испольуйте только в игре"); return true; }
 		if(count($args) !== 0) { $sender->sendMessage("Испольуйте: /cr"); return true; }
-		$sender->sendForm(new MenuForm("Крафт")
+		$sender->sendForm(new MenuForm("Крафт", "Выбери:",
 						[
 							new Button("План постройки"),
 							new Button("Киянка"),
@@ -47,7 +47,7 @@ final class Main extends PluginBase
 							{
 								$sender->getInventory()->addItem(Item::get(my:kuyanka));
 							}
-		return true;	}}};			
+		return true;	}));			
 	}
 }
 ?>
