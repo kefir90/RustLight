@@ -6,12 +6,12 @@ namespace Kefir\RustLight;
 
 use pocketmine\plugin\PluginBase;
 use pocketmine\command\{Command, CommandSender};
-use pocketmine\player\Player
-use pocketmine\Server
-use pocketmine\inventory\Inventory
+use pocketmine\player\Player;
+use pocketmine\Server;
+use pocketmine\inventory\Inventory;
 
-use Frago9876543210\EasyForms\elements\Button
-use Frago9876543210\EasyForms\forms\MenuForm
+use Frago9876543210\EasyForms\elements\Button;
+use Frago9876543210\EasyForms\forms\MenuForm;
 
 final class Main extends PluginBase
 {
