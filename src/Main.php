@@ -47,7 +47,8 @@ final class Main extends PluginBase
 							{
 								$sender->getInventory()->addItem(Item::get(my:kuyanka));
 							}
-		return true;	}));			
+						}));
+		return true;				
 	}
 }
 ?>
